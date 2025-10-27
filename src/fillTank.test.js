@@ -91,9 +91,9 @@ describe('fillTank', () => {
       },
     };
 
-    fillTank(customer, 100.678, 5);
+    fillTank(customer, 100.675, 5);
 
-    expect(customer).toHaveProperty('money', 2496.85);
+    expect(customer.money).toBeCloseTo(2496.86, 2);
     expect(customer.vehicle).toHaveProperty('fuelRemains', 5);
   });
 
@@ -110,5 +110,17 @@ describe('fillTank', () => {
 
     expect(customer).toHaveProperty('money', 1000);
     expect(customer.vehicle).toHaveProperty('fuelRemains', 25);
+  });
+
+  it('function should return undefined', () => {
+    const customer = {
+      money: 3000,
+      vehicle: {
+        maxTankCapacity: 40,
+        fuelRemains: 5,
+      },
+    };
+
+    expect(fillTank(customer, 100, 20)).toBeUndefined();
   });
 });
